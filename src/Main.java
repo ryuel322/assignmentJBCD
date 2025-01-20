@@ -5,7 +5,7 @@ public class Main {
 
         String url = "jdbc:postgresql://localhost:5432/postgres";
         String user = "postgres";
-        String password = "39467105";
+        String password = "55555";
         Artist artist1 = new Artist("Abylkhan Kasteev");
         Gallery gallery1 = new Gallery("Kasteev State Museum of Arts");
         Artwork artwork1 = new Artwork("Kazakh Girl", artist1, gallery1);
