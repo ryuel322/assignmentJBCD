@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
-
-public class Object {
+abstract class Object {
+    abstract String getDescription();
 }
