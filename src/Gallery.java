@@ -1,4 +1,16 @@
-package PACKAGE_NAME;
+class Gallery extends Object {
+    private String name;
 
-public class Gallery {
+    public Gallery(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Gallery: " + name;
+    }
 }
