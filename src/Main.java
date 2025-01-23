@@ -6,7 +6,7 @@ public class Main {
 
         String url = "jdbc:postgresql://localhost:5432/postgres";
         String user = "postgres";
-        String password = "39467105";
+        String password = "55555";
 
         try (Connection connection = DriverManager.getConnection(url, user, password);
              Scanner scanner = new Scanner(System.in)) {
@@ -48,7 +48,7 @@ public class Main {
                         addArtwork(connection, title, artistId, description);
                         break;
                     case 4:
-                        readAllArtwork(connection);
+                        readAllArtwork(connection, scanner);
                         break;
                     case 5:
                         System.out.print("Enter artwork ID to update: ");
@@ -114,8 +114,26 @@ public class Main {
         }
     }
 
-    public static void readAllArtwork(Connection connection) {
-        String sql = "SELECT id, title FROM artwork";
+    public static void readAllArtwork(Connection connection, Scanner scanner) {
+        System.out.println("Choose sorting option:");
+        System.out.println("1 - Sort by title (A-Z)");
+        System.out.println("2 - Sort by ID (newest first)");
+        System.out.print("Enter your choice: ");
+        
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        String orderBy = switch (choice) {
+            case 1 -> "ORDER BY title ASC";
+            case 2 -> "ORDER BY id DESC";
+            default -> {
+                System.out.println("Invalid choice, sorting by title.");
+                yield "ORDER BY title ASC";
+            }
+        };
+
+        String sql = "SELECT id, title FROM artwork " + orderBy;
+
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             System.out.println("List of artworks:");
             while (rs.next()) {
@@ -152,3 +170,4 @@ public class Main {
         }
     }
 }
+
